@@ -6,11 +6,19 @@
     "export": "next export"
   },
   "dependencies": {
+    "dirty-json": "^0.7.1",
+    "fs": "0.0.1-security",
+    "imdb-api": "^4.0.3",
+    "net": "^1.0.2",
     "next": "^8.0.0",
     "pusher": "^3.0.0",
     "pusher-js": "^5.0.2",
     "react": "^16.5.1",
-    "react-dom": "^16.5.1"
+    "react-dom": "^16.5.1",
+    "react-router-dom": "^5.1.2",
+    "tls": "0.0.1",
+    "tmdbv3": "^0.1.2",
+    "unirest": "^0.6.0"
   },
   "devDependencies": {
     "css-loader": "^3.2.0",

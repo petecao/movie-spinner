@@ -41,8 +41,6 @@ var sleep = function sleep(milliseconds) {
 
 var buttonStyle = {
   backgroundColor: "rgb(255, 87, 51)",
-
-  /* Green */
   border: "none",
   color: "white",
   padding: "15px 32px",
@@ -70,7 +68,8 @@ function (_React$Component) {
       count: '',
       movies: [],
       chosenMovie: "",
-      movie: ""
+      movie: "",
+      imgsrc: ""
     };
     _this.handleChange = _this.handleChange.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this));
     _this.handleSubmit = _this.handleSubmit.bind(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_5__["default"])(_this));
@@ -99,9 +98,20 @@ function (_React$Component) {
     key: "spinWheel",
     value: function spinWheel() {
       if (this.state.movies.length > 0 && !this.wheelSpun) {
-        console.log(this.state.movies[Math.floor(Math.random() * this.state.movies.length)]);
+        //console.log(this.state.movies[Math.floor(Math.random()*this.state.movies.length)]);
+        var randMovie = this.state.movies[Math.floor(Math.random() * this.state.movies.length)];
         this.setState({
-          chosenMovie: this.state.movies[Math.floor(Math.random() * this.state.movies.length)]
+          chosenMovie: randMovie
+        });
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + randMovie + "&callback=?", false); // false for synchronous request
+
+        xmlHttp.send(null);
+        var JSONString = xmlHttp.responseText.substring(2, xmlHttp.responseText.length - 1);
+        console.log(JSONString);
+        var movieJSON = JSON.parse(JSONString);
+        this.setState({
+          imgsrc: "http://image.tmdb.org/t/p/w500/" + movieJSON.results[0].poster_path + "class=img-responsive"
         });
         this.wheelSpun = true;
       }
@@ -123,7 +133,7 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("div", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 55
+          lineNumber: 71
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("form", {
@@ -134,7 +144,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 57
+          lineNumber: 73
         },
         __self: this
       }, "Type in a movie: ", react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("input", {
@@ -144,7 +154,7 @@ function (_React$Component) {
         onChange: this.handleChange,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 58
+          lineNumber: 74
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("input", {
@@ -152,7 +162,7 @@ function (_React$Component) {
         value: "Submit",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 59
+          lineNumber: 75
         },
         __self: this
       })), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("ol", {
@@ -163,7 +173,7 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 62
+          lineNumber: 78
         },
         __self: this
       }, this.state.movies.map(function (movie) {
@@ -173,13 +183,13 @@ function (_React$Component) {
           },
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 80
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("b", {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 64
+            lineNumber: 80
           },
           __self: this
         }, movie));
@@ -188,7 +198,7 @@ function (_React$Component) {
         style: buttonStyle,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 68
+          lineNumber: 84
         },
         __self: this
       }, "Spin! That! Wheel!"), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("button", {
@@ -196,7 +206,7 @@ function (_React$Component) {
         style: buttonStyle,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 69
+          lineNumber: 85
         },
         __self: this
       }, "Clear Choices"), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("h1", {
@@ -205,16 +215,23 @@ function (_React$Component) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 86
         },
         __self: this
       }, "You will be watching: ", react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("em", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 71
+          lineNumber: 86
         },
         __self: this
-      }, this.state.chosenMovie)));
+      }, this.state.chosenMovie)), react__WEBPACK_IMPORTED_MODULE_9___default.a.createElement("img", {
+        src: this.imgsrc,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 87
+        },
+        __self: this
+      }));
     }
   }]);
 
@@ -226,4 +243,4 @@ function (_React$Component) {
 /***/ })
 
 })
-//# sourceMappingURL=index.js.435417625379383ef77b.hot-update.js.map
+//# sourceMappingURL=index.js.fa5b1354cf89e2774249.hot-update.js.map
