@@ -31,7 +31,7 @@ class TextBox extends React.Component {
         this.setState({count: event.target.value});
       }
 
-    handleSubmit(event) {
+    handleSubmit(event) { //TODO: Make the textbox clear after submission
         this.setState({movies: [ ...this.state.movies, this.state.count + " "]});
         //this.setState({movie: "Successfuly entered {this.state.count} !"});
         event.preventDefault();
